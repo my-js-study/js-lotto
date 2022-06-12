@@ -17,7 +17,7 @@ export default class View {
     return this;
   }
 
-  emit(eventName, data) {
+  emit(eventName, data = {}) {
     emit(this.element, eventName, data);
     return this;
   }

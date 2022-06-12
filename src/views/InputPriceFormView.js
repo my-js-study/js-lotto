@@ -24,6 +24,10 @@ export default class InputPriceFormView extends View {
     );
   }
 
+  initialize() {
+    this.inputPrice.value = '';
+  }
+
   handleInputValidation(e) {
     this.inputPrice.setCustomValidity(
       this.getValidationMessage(e.target.validity) || '',
@@ -31,16 +35,17 @@ export default class InputPriceFormView extends View {
   }
 
   getValidationMessage(validity) {
-    for (const key in VALIDATION_MESSAGE) {
-      if (validity[key]) {
-        return VALIDATION_MESSAGE[key];
-      }
-    }
+    const validationMessage = Object.keys(VALIDATION_MESSAGE)
+      .filter((value) => validity[value])
+      .map((value) => VALIDATION_MESSAGE[value]);
+
+    return validationMessage.length > 0 ? validationMessage[0] : null;
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    const { value } = e.srcElement['input-price'];
+    const $input = e.target.elements['input-price'];
+    const { value } = $input;
 
     if (value >= MIN_INPUT_PRICE && value % MIN_INPUT_PRICE) {
       alert(ERROR_MESSAGE.NOT_TYPE_UNIT_OF_THOUSAND);

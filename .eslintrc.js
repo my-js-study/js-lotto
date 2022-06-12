@@ -16,6 +16,12 @@ module.exports = {
   plugins: ['prettier'],
   rules: {
     'prettier/prettier': ['error'],
-    'import/extensions': [{ js: 'always' }],
+    'import/extensions': ['error', { js: 'always' }],
+    'no-param-reassign': ['error', { props: false }],
+    'arrow-body-style': ['error'],
+    'import/prefer-default-export': 'off',
+    'no-alert': 'off',
+    'class-methods-use-this': 'off',
+    'no-underscore-dangle': ['error', { allowAfterThis: true }],
   },
 };

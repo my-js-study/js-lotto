@@ -1,12 +1,14 @@
 import Controller from './Controller.js';
-import InputLottoNumsView from './views/InputLottoNumsView.js';
+import InputLottoFormView from './views/InputLottoFormView.js';
 import InputPriceFormView from './views/InputPriceFormView.js';
+import ModalView from './views/ModalView.js';
 import PurchasedLottosView from './views/PurchasedLottosView.js';
 
 const lottoController = new Controller({
   inputPriceFormView: new InputPriceFormView(),
   purchasedLottosView: new PurchasedLottosView(),
-  inputLottoNumsView: new InputLottoNumsView(),
+  inputLottoFormView: new InputLottoFormView(),
+  modalView: new ModalView(),
 });
 
 lottoController.initialize();

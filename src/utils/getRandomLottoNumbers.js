@@ -1,7 +1,3 @@
-export const getLottoNumbers = (number) => {
-  return Array.from({ length: number }, (_) => generateLotto());
-};
-
 const generateLotto = () => {
   const lottoNumbers = new Set();
 
@@ -12,3 +8,6 @@ const generateLotto = () => {
 
   return Array.from(lottoNumbers);
 };
+
+export const getLottoNumbers = (number) =>
+  Array.from({ length: number }, () => generateLotto());

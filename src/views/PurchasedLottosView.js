@@ -1,5 +1,4 @@
-import { $, $$, setDisplay } from '../utils/dom.js';
-import { getLottoNumbers } from '../utils/getRandomLottoNumbers.js';
+import { $, $$ } from '../utils/dom.js';
 import View from './View.js';
 
 export default class PurchasedLottosView extends View {
@@ -21,6 +20,17 @@ export default class PurchasedLottosView extends View {
     );
   }
 
+  initialize() {
+    this.numberViewSwitch.checked = false;
+
+    const lottoDetails = $$('.lotto-detail');
+
+    this.lottoIcons.classList.remove('flex-col');
+    lottoDetails.forEach((el) => {
+      el.classList.remove('lotto-details-display-show');
+    });
+  }
+
   handleChangeNumberViewSwitch() {
     const { checked } = this.numberViewSwitch;
 
@@ -29,7 +39,6 @@ export default class PurchasedLottosView extends View {
     if (checked) {
       this.lottoIcons.classList.add('flex-col');
       lottoDetails.forEach((el) => {
-        el.classList.remove('lotto-details-display-hide');
         el.classList.add('lotto-details-display-show');
       });
       return;
@@ -38,7 +47,6 @@ export default class PurchasedLottosView extends View {
     this.lottoIcons.classList.remove('flex-col');
     lottoDetails.forEach((el) => {
       el.classList.remove('lotto-details-display-show');
-      el.classList.add('lotto-details-display-hide');
     });
   }
 
@@ -46,15 +54,12 @@ export default class PurchasedLottosView extends View {
     this.numberOfLottos = numberOfLottos;
   }
 
-  show() {
+  show(purchasedLottos) {
     this.totalPurchased.innerHTML = this.getNumberOfLotteries(
       this.numberOfLottos,
     );
 
-    this.lottoIcons.innerHTML = this.getLottoList(
-      getLottoNumbers(this.numberOfLottos),
-    );
-
+    this.lottoIcons.innerHTML = this.getLottoList(purchasedLottos);
     super.show();
   }
 
